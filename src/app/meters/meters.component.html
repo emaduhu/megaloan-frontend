@@ -1,0 +1,149 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Meters</h4>
+            <!--                      <p class="card-category"> Here is a subtitle for this table</p>-->
+          </div>
+          <div class="card-body">
+
+            <!-- <div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div> -->
+            <!-- <div style="border: 1px solid red;  margin: 5px; padding: 5px;">
+              <div class="clearfix"></div> -->
+            <form [formGroup]="filterForm">
+              <div class="row">
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nickname</mat-label>
+                    <input matInput placeholder="Nick Name" formControlName="nickName" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Meter number</mat-label>
+                    <input matInput placeholder="Meter Number" formControlName="meterNumber" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput placeholder="Phone Number" formControlName="phoneNumber" type="text">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Registration Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="startDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error>Registration start date is required!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Registration End Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="endDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error>Registration end date is required!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                (click)="filter(filterForm.value)">Filter</button>
+
+              <button mat-raised-button class="btn btn-danger pull-left" (click)="clearFilter()">Clear</button>
+
+            </form>
+            <!-- <div class="clearfix"></div>
+            </div> -->
+
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+
+            <div class="example-container mat-elevation-z8">
+
+              <mat-table [dataSource]="dataSource" matSort class="table table-hover">
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> S/N. </mat-header-cell>
+                  <!-- <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell> -->
+                  <mat-cell *matCellDef="let row;let i=index;">{{i+1}}</mat-cell>
+                </ng-container>
+
+                <!-- Color Column -->
+                <ng-container matColumnDef="metername">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Nick Name </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.metername}} </mat-cell>
+                </ng-container>
+
+                <!-- Meter Number Column -->
+                <ng-container matColumnDef="meterNumber">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Meter Number </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.meterNumber}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="msisdn">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Phone Number </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.msisdn}} </mat-cell>
+                </ng-container>
+
+
+
+                <!-- Registration Date Column -->
+                <ng-container matColumnDef="createdAt">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Registration Date </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.createdAt | date}} </mat-cell>
+                </ng-container>
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <!-- <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button> -->
+
+                    <!-- <button mat-icon-button color="accent" (click)="forwardToken(row.meterNumber)">
+        <mat-icon 
+           matTooltip="Forward Token"
+           [matTooltipPosition]="position.value"
+          matTooltipHideDelay="1000"
+        aria-label="Forwad Token">forward</mat-icon>
+      </button>   -->
+
+                    <!-- <button mat-raised-button color="warn" (click)="forwardToken(row.meterNumber)" >Forward Token</button> -->
+
+                    <a [routerLink]="['/token-list',row.meterNumber]" title="Token List">
+                      <mat-icon aria-hidden="false" aria-label="home icon">menu</mat-icon>
+                    </a>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

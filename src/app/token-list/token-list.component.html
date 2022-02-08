@@ -1,0 +1,97 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Token List</h4>
+  <!--                      <p class="card-category"> Here is a subtitle for this table</p>-->
+                    </div>
+                    <div class="card-body">
+  
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  
+  <div class="example-container mat-elevation-z8">
+  
+    <mat-table [dataSource]="dataSource" matSort class="table table-hover">
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> S/N. </mat-header-cell>
+        <!-- <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell> -->
+        <mat-cell *matCellDef="let row;let i=index;">{{i+1}}</mat-cell>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="token">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Token</mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.token}} </mat-cell>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="rechargeVolume">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Recharge Volume </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.rechargeVolume}} </mat-cell>
+      </ng-container>
+
+      <!-- Color Column -->
+      <ng-container matColumnDef="sent">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sent </mat-header-cell>
+        <mat-cell *matCellDef="let row" > 
+            <p class="thick" *ngIf="row.sent">True</p>
+            <p class="thick" *ngIf="!row.sent">False</p>
+            </mat-cell>
+      </ng-container>
+  
+      <!-- Color Column -->
+      <ng-container matColumnDef="sentTime">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Sent Time </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.sentTime | date:'medium'}} </mat-cell>
+      </ng-container>
+
+      <!-- Registration Date Column -->
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Request Date </mat-header-cell>
+        <mat-cell *matCellDef="let row" > {{row.createdAt  | date:'medium'}}  </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <!-- <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let row" >  
+          <button mat-icon-button color="accent" (click)="startEdit(i, row.id, row.title, row.state, row.url, row.created_at, row.updated_at)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+  
+        <button mat-icon-button color="accent" (click)="forwardToken(row.meterNumber)">
+          <mat-icon 
+             matTooltip="Forward Token"
+             [matTooltipPosition]="position.value"
+            matTooltipHideDelay="1000"
+          aria-label="Forwad Token">forward</mat-icon>
+        </button>  
+      
+        <button mat-raised-button color="warn" (click)="forwardToken(row.meterNumber)" >Forward Token</button>
+  
+      </mat-cell>
+      </ng-container> -->
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

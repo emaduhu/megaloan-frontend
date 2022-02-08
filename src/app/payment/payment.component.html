@@ -1,0 +1,99 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Payment</h4>
+                        <p class="card-category"> Payment details for meter number {{payment.meterNumber}}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="clearfix"></div>
+
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <!-- <thead class="text-warning">
+                                  <th>TITLE</th>
+                                  <th>VALUE</th>
+                              </thead> -->
+                                <tbody>
+                                    <tr>
+                                        <td>PAY DATE:</td>
+                                        <td>
+                                            <p *ngIf="payment.createdAt != null">{{payment.createdAt | date:'medium'}}
+                                            </p>
+                                            <p *ngIf="payment.createdAt == null">--</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PAID AMOUNT: </td>
+                                        <td>
+                                            <p *ngIf="payment.paidamt != null">{{payment.paidamt}} </p>
+                                            <p *ngIf="payment.paidamt == null">--</p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>CONTROL NUMBER</td>
+                                        <td>
+
+                                            <p *ngIf="payment.payctrnum != null">{{payment.payctrnum}} </p>
+                                            <p *ngIf="payment.payctrnum == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>METER NUMBER</td>
+                                        <td>
+                                            <p *ngIf="payment.meterNumber != null">{{payment.meterNumber}} </p>
+                                            <p *ngIf="payment.meterNumber == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PAYER PHONE NUMBER</td>
+                                        <td>
+                                            <p *ngIf="payment.pyrcellnum != null">{{payment.pyrcellnum}} </p>
+                                            <p *ngIf="payment.pyrcellnum == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PSP NAME</td>
+                                        <td>
+
+                                            <p *ngIf="payment.pspname != null">{{payment.pspname}} </p>
+                                            <p *ngIf="payment.pspname == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>PSP RECEIPT</td>
+                                        <td>
+
+                                            <p *ngIf="payment.pspreceiptnumber != null">{{payment.pspreceiptnumber}}
+                                            </p>
+                                            <p *ngIf="payment.pspreceiptnumber == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>GEPG RECEIPT</td>
+                                        <td>
+
+                                            <p *ngIf="payment.payrefid != null">{{payment.payrefid}} </p>
+                                            <p *ngIf="payment.payrefid == null">--</p>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button mat-raised-button type="submit" class="btn btn-danger pull-left" (click)="printReceipt(payment.billId)" [disabled]="payment.pspreceiptnumber == null">Print Receipt</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

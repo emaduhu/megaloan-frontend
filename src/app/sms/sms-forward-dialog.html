@@ -1,0 +1,15 @@
+<div mat-dialog-content>
+  <p>Enter phone number to forward sms.</p>
+
+  <!-- <form [formGroup]="forwardForm"> -->
+            <mat-form-field class="example-full-width">
+              <input matInput  [(ngModel)]="data.phone" placeholder="Phone number"  type="number">
+            </mat-form-field>
+ <!-- </form> -->
+</div>
+   <mat-dialog-actions align="center">
+
+    <button mat-raised-button type="submit" class="btn btn-danger pull-left" (click)="onNoClick()">Cancel</button>
+
+   <button mat-raised-button  class="btn btn-success pull-right" [mat-dialog-close]="data.phone" cdkFocusInitial>FORWARD</button> 
+  </mat-dialog-actions>

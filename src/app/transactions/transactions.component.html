@@ -1,0 +1,251 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title ">Transactions</h4>
+            <!-- <p class="card-category"> Here is a subtitle for this table</p>-->
+          </div>
+          <div class="card-body">
+
+            <form [formGroup]="filterForm">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Token</mat-label>
+                    <input matInput placeholder="Token" formControlName="token" type="text">
+                  </mat-form-field>
+
+
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Meter number</mat-label>
+                    <input matInput placeholder="Meter Number" formControlName="meterNumber" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Psp receipt</mat-label>
+                    <input matInput placeholder="Psp Receipt" formControlName="pspReceipt" type="text">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Gepg receipt</mat-label>
+                    <input matInput placeholder="Gepg Receipt" formControlName="gepgReceipt" type="text">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Control number</mat-label>
+                    <input matInput placeholder="Control Number" formControlName="controlNumber" type="number">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput placeholder="Phone Number" formControlName="phoneNumber" type="number">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Bill Start Date</mat-label>
+                    <input matInput [matDatepicker]="picker1" formControlName="startDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <mat-error>Bill start date is required!</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Bill End Date</mat-label>
+                    <input matInput [matDatepicker]="picker2" formControlName="endDate" [max]="maxDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-error>Bill end date is required!</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                (click)="filter(filterForm.value)">Filter</button>
+
+              <button mat-raised-button class="btn btn-danger pull-left" (click)="clearFilter()">Clear</button>
+
+            </form>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <div class="clearfix"></div>
+            <div class="example-container mat-elevation-z8">
+
+              <mat-table [dataSource]="dataSource" matSort class="table table-hover">
+
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> S/N. </mat-header-cell>
+                  <!-- <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell> -->
+                  <mat-cell *matCellDef="let row;let i=index;">{{i+1}}</mat-cell>
+                </ng-container>
+
+                <!-- Color Column -->
+                <ng-container matColumnDef="customerName">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.customerName != null"> {{row.customerName}} </div>
+                    <div *ngIf="row.customerName == null">--</div>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Color Column -->
+                <ng-container matColumnDef="meterNumber">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Meter Number </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.meterNumber}} </mat-cell>
+                </ng-container>
+
+                <!-- Contoll Number Column -->
+                <ng-container matColumnDef="controlNumber">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Control Number </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.controlNumber != null">{{row.controlNumber}} </div>
+                    <div *ngIf="row.controlNumber == null">--</div>
+
+                  </mat-cell>
+                </ng-container>
+
+                <!-- paymentStatus Column -->
+                <ng-container matColumnDef="billAmount">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Requested Amount </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.billAmount}}</mat-cell>
+                </ng-container>
+
+                <!-- phoneNumber Column -->
+                <ng-container matColumnDef="phoneNumber">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number </mat-header-cell>
+                  <mat-cell *matCellDef="let row"> {{row.phoneNumber}} </mat-cell>
+                </ng-container>
+
+                <!-- PSP Column -->
+                <ng-container matColumnDef="gepgReceipt">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Gepg Receipt </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+                    <div *ngIf="row.gepgReceipt != null">{{row.gepgReceipt}} </div>
+                    <div *ngIf="row.gepgReceipt == null">--</div>
+
+                  </mat-cell>
+
+                </ng-container>
+
+                <!-- PSP Column -->
+                <ng-container matColumnDef="pspReceipt">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> PSP Receipt </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+
+                    <div *ngIf="row.pspReceipt != null">{{row.pspReceipt}} </div>
+                    <div *ngIf="row.pspReceipt == null">--</div>
+
+                  </mat-cell>
+                </ng-container>
+
+
+                <!-- paymentStatus Column -->
+                <ng-container matColumnDef="paidAmount">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Paid Amount </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.paidAmount != null">{{row.paidAmount}} </div>
+                    <div *ngIf="row.paidAmount == null">--</div>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- token Column -->
+                <ng-container matColumnDef="token">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Token</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.token != null">{{row.token}} </div>
+                    <div *ngIf="row.token == null">--</div>
+                  </mat-cell>
+                </ng-container>
+
+                <!-- Transaction Date Column -->
+                <ng-container matColumnDef="billedAt">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Transaction Date </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <div *ngIf="row.billedAt != null">{{row.billedAt | date:'medium'}} </div>
+                    <div *ngIf="row.billedAt == null">--</div>
+                  </mat-cell>
+
+                </ng-container>
+
+                <!-- Contoll Number Column -->
+                <!-- <ng-container matColumnDef="error"> -->
+                <!-- <mat-header-cell *matHeaderCellDef mat-sort-header>Control number Error </mat-header-cell> -->
+                <!-- <mat-cell *matCellDef="let row" >  -->
+                <!-- <div *ngIf="row.error != null" text-align='center' style="color: darkred;font-style: italic;">{{row.error}} </div> -->
+                <!-- <div *ngIf="row.error == null">--</div> -->
+
+                <!-- </mat-cell> -->
+                <!-- </ng-container> -->
+
+                <!-- Actions Column -->
+                <ng-container matColumnDef="actions">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+
+                    <!-- <button mat-icon-button color="accent" (click)="forwardToken(row.meterNumber)">
+        <mat-icon 
+           matTooltip="Forward Token"
+           [matTooltipPosition]="position.value"
+          matTooltipHideDelay="1000"
+        aria-label="Forwad Token">forward</mat-icon>
+      </button>   -->
+
+                    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item [routerLink]="['/bill',row.billId]">
+                        <mat-icon>account_balance</mat-icon>
+                        <span>Bill</span>
+                      </button>
+                      <button mat-menu-item [routerLink]="['/payment',row.billId]">
+                        <mat-icon>payment</mat-icon>
+                        <span>Payment</span>
+                      </button>
+                      <button mat-menu-item [routerLink]="['/token',row.billId]">
+                        <mat-icon>list</mat-icon>
+                        <span>Token</span>
+                      </button>
+                      <button mat-menu-item [routerLink]="['/sms',row.token]"
+                        *ngIf="row.token != null || row.token != ''">
+                        <mat-icon>textsms</mat-icon>
+                        <span>SMS</span>
+                      </button>
+                    </mat-menu>
+                  </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+              </mat-table>
+
+              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Bill</h4>
+                        <p class="card-category"> Bill details for meter number {{bill.meterNumber}}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="clearfix"></div>
+
+                        <div class="card-body table-responsive">
+                          <table class="table table-hover">
+                              <!-- <thead class="text-warning">
+                                  <th>TITLE</th>
+                                  <th>VALUE</th>
+                              </thead> -->
+                              <tbody>
+                                  <tr>
+                                      <td>DATE:</td>
+                                      <td>
+                                          <p *ngIf="bill.createdAt != null">{{bill.createdAt | date:'medium'}} </p>
+                                          <p *ngIf="bill.createdAt == null">--</p>
+                                
+                                        </td>
+                                  </tr>
+                                  <tr>
+                                      <td>BILL AMOUNT: </td>
+                                      <td><p *ngIf="bill.amount != null">{{bill.amount}} </p>
+                                        <p *ngIf="bill.amount == null">--</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                      <td>CONTROL NUMBER</td>
+                                      <td>
+                                          <p *ngIf="bill.controlNumber != null">{{bill.controlNumber}} </p>
+                                        <p *ngIf="bill.controlNumber == null">--</p>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>PAY TYPE</td>
+                                    <td>
+                                      <p *ngIf="bill.gepgPayType != null">{{bill.gepgPayType}} </p>
+                                      <p *ngIf="bill.gepgPayType == null">--</p>
+                                    </td>
+                                </tr>
+                                  <tr>
+                                      <td>METER NUMBER</td>
+                                      <td>
+                                        <p *ngIf="bill.meterNumber != null">{{bill.meterNumber}} </p>
+                                        <p *ngIf="bill.meterNumber == null">--</p>
+                                      </td>
+                                  </tr>
+                                  <tr>
+                                    <td>CUSTOMER NAME</td>
+                                    <td>
+                                        <p *ngIf="bill.customerName != null">{{bill.customerName}} </p>
+                                        <p *ngIf="bill.customerName == null">--</p>
+    
+                                    </td>
+                                </tr>
+
+                                  <tr>
+                                    <td>PHONE NUMBER</td>
+                                    <td>
+                                        <p *ngIf="bill.payerCellNum != null">{{bill.payerCellNum}} </p>
+                                        <p *ngIf="bill.payerCellNum == null">--</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                  <td>REMARKS</td>
+                                  <td>
+                                      <p *ngIf="bill.payRemarks != null">{{bill.payRemarks}} </p>
+                                        <p *ngIf="bill.payRemarks == null">--</p>
+
+                                  </td>
+                              </tr>
+                              <tr>
+                                <td>ERROR</td>
+                                <td>
+                                    <p *ngIf="bill.error != null" style="color: darkred;font-style: italic;">{{bill.error}} </p>
+                                    <p *ngIf="bill.error == null">--</p>
+
+                                </td>
+                            </tr>
+                              </tbody>
+                          </table>
+                      </div>
+
+                    <button mat-raised-button type="submit" class="btn btn-danger pull-left" (click)="printBill(bill.payTransactionId)" [disabled]="bill.controlNumber == null">Print Bill</button>
+
+                    <button mat-raised-button  type="submit" class="btn btn-danger pull-left" (click)="cancelBill(bill.payTransactionId)" [disabled]="bill.controlNumber == null">Cancel Bill</button>
+
+                    <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-left" (click)="reActivateBill(bill.payTransactionId)" [disabled]="bill.controlNumber == null">Re Activate Bill</button> -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

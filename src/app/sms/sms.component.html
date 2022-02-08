@@ -1,0 +1,79 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">SMS</h4>
+                        <p class="card-category"> SMS details for Token {{sms.token}}</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="clearfix"></div>
+                        <div class="card-body table-responsive">
+                          <table class="table table-hover">
+                              <!-- <thead class="text-warning">
+                                  <th>TITLE</th>
+                                  <th>VALUE</th>
+                              </thead> -->
+                              <tbody>
+                                  <tr>
+                                      <td>DATE:</td>
+                                      <td>
+                                          <p *ngIf="sms.createdAt != null">{{sms.createdAt | date:'medium'}} </p>
+                                        <p *ngIf="sms.createdAt == null">--</p>
+                                    
+                                
+                                        
+                                        </td>
+                                  </tr>
+
+                                  <tr>
+                                      <td>MESSAGE:</td>
+                                      <td>
+                                        <p *ngIf="sms.message != null">{{sms.message}} </p>
+                                        <p *ngIf="sms.message == null">--</p>
+                                    
+                                                      </td>
+                                  </tr>
+                                  <tr>
+                                      <td>SENT: </td>
+                                      <td>
+                                          <p *ngIf="sms.sent != null">{{sms.sent}} </p>
+                                        <p *ngIf="sms.sent == null">--</p>
+                                        </td>
+                                  </tr>
+                                  <tr>
+                                      <td>SENT AT: </td>
+                                      <td>
+                                          <p *ngIf="sms.sentTime != null">{{sms.sentTime | date:'medium'}} </p>
+                                          <p *ngIf="sms.sentTime == null">--</p>
+                                        
+                                        </td>
+                                  </tr>
+                                  <tr>
+                                      <td>SENT TO: </td>
+                                      <td>
+
+                                        <p *ngIf="sms.msisdn != null">{{sms.msisdn}} </p>
+                                          <p *ngIf="sms.msisdn == null">--</p>
+                                      </td>
+                                  </tr>
+<!--                                <tr>-->
+<!--                                  <td>DELIVERY STATUS</td>-->
+<!--                                  <td>{{sms.remarks}}</td>-->
+<!--                              </tr>-->
+                              </tbody>
+                          </table>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-left" (click)="reSendSms(sms.token)" [disabled]="sms.message == null || sms.msisdn == null">Re Send</button>
+
+                         <button mat-raised-button  class="btn btn-danger pull-right" (click)="openDialog()" [disabled]="sms.message == null">Forward</button>
+
+                      </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

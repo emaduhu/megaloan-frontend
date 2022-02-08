@@ -1,0 +1,66 @@
+<div id="login">
+
+    <div id = "login-form-wrapper" class="col-md-4 offset-md-4">
+
+        <div class="alert text-center" style="background-color:'#EE3427';  font-weight: bold; color:'white'; font-size:34px;">
+            <h4 class="text-center">NATURAL GAS BILLING SYSTEM (NGBS)</h4>
+        </div>
+
+        <div class="card">
+            <div class="text-center">
+                <img src="assets/img/tpdc-logo-red.png" height="150px">
+            </div>
+            <h4 class="card-header text-center">LOGIN</h4>
+            <div class="card-body">
+                <!--            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">-->
+                <!--                <div class="form-group">-->
+                <!--                    <label>Username</label>-->
+                <!--                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />-->
+                <!--                    <div *ngIf="submitted && f.username.errors" class="">-->
+                <!--                        <div *ngIf="f.username.errors.required">Username is required</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div class="form-group">-->
+                <!--                    <label>Password</label>-->
+                <!--                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />-->
+                <!--                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">-->
+                <!--                        <div *ngIf="f.password.errors.required">Password is required</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <button [disabled]="loading" class="btn btn-large btn-danger">-->
+                <!--                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
+                <!--                    Login-->
+                <!--                </button>-->
+                <!--                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>-->
+                <!--            </form>-->
+
+                <form name="loginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Username</mat-label>
+                        <input matInput formControlName="username"/>
+                        <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                        <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                            Username is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password"/>
+                        <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
+                        <mat-error>
+                            Password is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <button [disabled]="loading" class="btn btn-large btn-danger">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Login
+                    </button>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

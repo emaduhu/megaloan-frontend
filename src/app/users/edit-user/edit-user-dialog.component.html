@@ -1,0 +1,88 @@
+<!-- <div class="col"> -->
+    <div>
+        <h4 class="dialog-headline">Edit User
+            <span>
+       <mat-icon class="pull-right close-icon" (click)="onCloseDialog()" cursor:pointer>close</mat-icon>
+    </span></h4>
+    </div>
+
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname" type="text"/>
+            <mat-icon matSuffix class="secondary-text">person</mat-icon>
+            <mat-error *ngIf="editUserForm.get('firstname').hasError('required')">
+                First name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Middle Name</mat-label>
+            <input matInput formControlName="middlename" type="text"/>
+            <mat-icon matSuffix class="secondary-text">person</mat-icon>
+            <mat-error *ngIf="editUserForm.get('middlename').hasError('required')">
+                Middle name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname" type="text"/>
+            <mat-icon matSuffix class="secondary-text">person</mat-icon>
+            <mat-error *ngIf="editUserForm.get('lastname').hasError('required')">
+                Last name is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email"/>
+            <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+            <mat-error *ngIf="editUserForm.get('email').hasError('required')">
+                Email is required
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input matInput formControlName="phone" type="number" maxlength="12" minlength="10"/>
+            <!-- <span matPrefix>+255</span> -->
+            <mat-icon matSuffix class="secondary-text">phone</mat-icon>
+            <mat-error *ngIf="editUserForm.get('phone').hasError('required')">
+                Phone is required
+            </mat-error>
+            <mat-error *ngIf="editUserForm.get('phone').hasError('pattern')">
+                Phone must contain 10 characters
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-select placeholder="Select role" formControlName="role">
+                <mat-option>--</mat-option>
+                <mat-option value="option"
+                            *ngFor="let role of this.roles" [value]="role">{{role.name}}
+                </mat-option>
+            </mat-select>
+
+            <mat-error *ngIf="editUserForm.get('role').hasError('required')">
+                Role is required
+            </mat-error>
+            <mat-hint>{{editUserForm.get('role').value?.name}}</mat-hint>
+        </mat-form-field>
+    </form>
+
+<!-- </div> -->
+
+<mat-dialog-actions align="center">
+
+    <!-- <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onCloseDialog()">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Cancel</button> -->
+
+    <button mat-raised-button type="submit" class="btn btn-success"  [disabled] = "!editUserForm.valid  || editUserForm.role == ''" (click) = "onSubmit(editUserForm.value)" >
+        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+        Save</button>
+
+</mat-dialog-actions>
+

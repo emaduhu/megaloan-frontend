@@ -1,0 +1,57 @@
+<div class="col">
+    <p align="center">Fill form to add user.</p>
+
+    <!-- <form [formGroup]="forwardForm"> -->
+
+        <!-- <div class="row"> -->
+            <!-- <div class="col-md-4"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.firstName" placeholder="First Name" type="text">
+                </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-md-4"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.middleName" placeholder="Middle Name" type="text">
+                </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-md-4"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.lastName" placeholder="Last Name" type="text">
+                </mat-form-field>
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+            <!-- <div class="col-md-6"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.email" placeholder="Email" type="email">
+                </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-md-6"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.msisdn" placeholder="Phone Number" type="number">
+                </mat-form-field>
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="row"> -->
+            <!-- <div class="col-md-6"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.password" placeholder="Password" type="password">
+                </mat-form-field>
+            <!-- </div> -->
+            <!-- <div class="col-md-6"> -->
+                <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="data.repeatPassword" placeholder="Repeat Password" type="password">
+                </mat-form-field>
+            <!-- </div> -->
+        <!-- </div> -->
+
+    <!-- </form> -->
+</div>
+<mat-dialog-actions align="center">
+
+    <button mat-raised-button type="submit" class="btn btn-danger pull-right" (click)="onNoClick()">Cancel</button>
+
+    <button mat-raised-button type="submit" class="btn btn-success pull-left" [mat-dialog-close]="data"
+        cdkFocusInitial>Add</button>
+
+</mat-dialog-actions>
